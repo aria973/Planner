@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Planner</title>
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+<link rel="apple-touch-icon" href="ara_apple_ios.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1 , user-scalable=no , viewport-fit=cover" />
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4A6FA5">
+
+<!-- iOS PWA -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Daily Planner">
+
+<style>
+/* ... your existing CSS from the working planner ... */
+</style>
+</head>
+<body>
+<!-- ... your existing planner HTML ... -->
+
+<script>
+// Register service worker for PWA
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(() => console.log('Service Worker registered'));
+}
+</script>
+</body>
+</html>
