@@ -955,6 +955,25 @@ document.addEventListener('visibilitychange', () => {
 });
 
 
+window.addEventListener('pageshow', () => {
+  syncViewportBackground();
+});
+
+window.addEventListener('resize', () => {
+  syncViewportBackground();
+});
+
+window.addEventListener('orientationchange', () => {
+  setTimeout(syncViewportBackground, 60);
+});
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    setTimeout(syncViewportBackground, 30);
+  }
+});
+
+
 
 
 
