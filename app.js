@@ -947,3 +947,14 @@ async function deleteEntry(id) { const t = tx('entries', 'readwrite'); t.objectS
 function getEntryByDate(dateKey) { const t = tx('entries'); return requestToPromise(t.objectStore('entries').index('dateKey').get(dateKey)); }
 function getAllEntries() { const t = tx('entries'); return requestToPromise(t.objectStore('entries').getAll()); }
 async function clearEntries() { const t = tx('entries', 'readwrite'); t.objectStore('entries').clear(); await transactionComplete(t); return true; }
+
+window.addEventListener('pageshow', syncViewportBackground);
+window.addEventListener('resize', syncViewportBackground);
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) syncViewportBackground();
+});
+
+
+
+
+
