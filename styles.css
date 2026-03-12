@@ -329,8 +329,3 @@ body.light .glass-3d {
   overflow: visible;
 }
 
-.moodbar,
-.moodbar-wrap,
-.mood-section {
-  margin-bottom: 16px !important;
-}
