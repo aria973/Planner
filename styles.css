@@ -228,77 +228,167 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(env(sa
 
 
 
-/* PATCH TO FIX STRETCHED SCREEN AND HIDDEN BOTTOM BAR */
 
-/* Reset the viewport to ensure content stays inside */
+/* ===== iOS safe viewport fix - corrected ===== */
+
 html,
 body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
-  max-width: 100vw !important; /* Prevent horizontal overflow */
-  height: 100vh !important; /* Strictly set to the visible viewport height */
-  background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
+  max-width: 100vw !important;
+  height: 100% !important;
+  min-height: 100% !important;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  background: var(--bg) !important;
   color: var(--text) !important;
-  font-family: var(--body-font) !important;
-  overflow-x: hidden !important; /* Avoid horizontal scroll */
-  overflow-y: hidden !important; /* Block unnecessary vertical scroll */
 }
 
 html {
-  background: var(--bg) !important; /* Use consistent background */
+  background: var(--bg) !important;
 }
 
 body {
   position: relative !important;
+  overscroll-behavior: none !important;
 }
 
+/* safe area filler for iOS bottom */
 body::after {
-  content: '' !important;
+  content: "" !important;
   position: fixed !important;
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  height: env(safe-area-inset-bottom) !important; /* Ensure safe area for iOS devices */
-  background: var(--bg2) !important;
-  z-index: -1 !important;
+  height: env(safe-area-inset-bottom, 0px) !important;
+  background: var(--bg) !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
-/* Ensure app content fits perfectly within the height */
+/* app root */
 .app-shell {
-  position: relative !important;
+  position: fixed !important;
   inset: 0 !important;
   width: 100% !important;
-  max-width: 100vw !important; /* Prevent app from exceeding the viewport width */
-  height: 100vh !important; /* Confine app content to the visible viewport */
-  overflow: hidden !important; /* Stop any child elements from expanding outside */
-  background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
-  isolation: isolate;
+  height: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+  background: transparent !important;
+  isolation: isolate !important;
 }
 
+/* wrapper that holds header + page + tabbar */
 .viewport-shell {
-  overflow: hidden !important; /* Fix viewport scrolling issues */
+  position: relative !important;
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
   background: transparent !important;
 }
 
-.content-scroller {
-  max-height: calc(100vh - var(--safe-bottom)) !important; /* Prevent content from overflowing below */
-  padding-bottom: calc(var(--tabbar-size) + env(safe-area-inset-bottom)) !important;
+/* glass top bar */
+.topbar,
+.navbar-top,
+.app-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 30 !important;
+  padding-top: env(safe-area-inset-top, 0px) !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
 }
 
-.tabbar {
+/* bottom tabbar */
+.tabbar,
+.bottom-nav,
+.navbar-bottom {
   position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
   bottom: 0 !important;
-  left: 0;
-  right: 0;
+  z-index: 40 !important;
   height: var(--tabbar-size) !important;
-  z-index: 10;
-  background: var(--surface) !important;
-  box-shadow: var(--panel-shadow) !important;
+  padding-bottom: env(safe-area-inset-bottom, 0px) !important;
+  box-sizing: content-box !important;
+  backdrop-filter: blur(18px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.2) !important;
 }
 
-/* Pages should fit within the viewport */
+/* main scrolling zone */
+.content-scroller,
+.page-stack,
+.main-content {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: calc(var(--tabbar-size) + env(safe-area-inset-bottom, 0px)) !important;
+  overflow: hidden !important;
+}
+
+/* each page should size to visible area only */
 .page {
-  height: calc(100vh - var(--tabbar-size)) !important; /* Ensure the page doesn't overstretch */
-  overflow-y: auto !important; /* Enable vertical scrolling inside the page */
+  position: absolute !important;
+  inset: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  box-sizing: border-box !important;
+  padding-bottom: 20px !important;
+}
+
+/* HOME MUST NOT SCROLL */
+.page.page-home,
+.page.home-page,
+.home-page {
+  overflow: hidden !important;
+}
+
+/* home internal layout should fit between top and bottom bars */
+.home-content,
+.home-inner,
+.home-layout {
+  height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+  box-sizing: border-box !important;
+  padding-bottom: 8px !important;
+  min-height: 0 !important;
+}
+
+/* date block should not grow too much */
+.home-date-block,
+.hero-date,
+.date-hero {
+  flex: 0 0 auto !important;
+  max-height: 42vh !important;
+}
+
+/* mood section stays visible above tabbar */
+.moodbar-wrap,
+.mood-wrap,
+.mood-section {
+  flex: 0 0 auto !important;
+  margin-top: auto !important;
+  margin-bottom: 4px !important;
+}
+
+/* prevent clipped shadows */
+.glass-3d,
+.card,
+.panel,
+.tabbar,
+.app-header {
+  overflow: visible !important;
+}
+
+/* only scrollable inner lists/cards should clip themselves if needed */
+.card-inner,
+.list-inner,
+.media-frame {
+  overflow: hidden;
 }
