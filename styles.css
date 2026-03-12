@@ -228,21 +228,22 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(env(sa
 
 
 
-/* PATCH TO REMOVE BLACK BARS ON IOS DEVICES */
+
+/* PATCH TO FIX BLACK BARS ON IOS DEVICES */
 html,
 body {
   margin: 0 !important;
   padding: 0 !important;
   width: 100% !important;
   height: 100% !important;
-  min-height: 100vh !important; /* Ensures proper rendering of height */
+  min-height: 100vh !important; /* Ensures the content fills the height */
   background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
   color: var(--text) !important;
   font-family: var(--body-font) !important;
 }
 
 html {
-  background: var(--bg) !important; /* Matches the starting gradient */
+  background: var(--bg) !important; /* Matches the initial gradient */
 }
 
 body {
@@ -257,7 +258,7 @@ body::after {
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  height: env(safe-area-inset-bottom) !important; /* Accounts for the bottom inset */
+  height: env(safe-area-inset-bottom) !important; /* Bottom safe-area fix */
   background: var(--bg2) !important;
   z-index: -1 !important;
 }
@@ -267,7 +268,7 @@ body::after {
   inset: 0 !important;
   isolation: isolate !important;
   width: 100% !important;
-  height: calc(100% + env(safe-area-inset-top) + env(safe-area-inset-bottom)) !important; /* Adjusts for full-screen height */
+  height: calc(100% + env(safe-area-inset-top) + env(safe-area-inset-bottom)) !important; /* Full height correction */
   padding-bottom: calc(var(--safe-bottom) + 14px) !important;
   background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
 }
