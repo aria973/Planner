@@ -860,7 +860,54 @@ body::after{
 }
 
 
+/* ===== bottom white-bar killer ===== */
 
+html,
+body{
+  background:linear-gradient(180deg,var(--bg),var(--bg2)) !important;
+}
+
+.app-shell{
+  top:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  left:0 !important;
+  width:auto !important;
+  height:auto !important;
+  min-height:auto !important;
+}
+
+/* لایه‌ی پوشاننده‌ی انتهای صفحه */
+body::after{
+  content:'' !important;
+  display:block !important;
+  position:fixed !important;
+  left:0 !important;
+  right:0 !important;
+  bottom:0 !important;
+  height:calc(env(safe-area-inset-bottom, 0px) + 48px) !important;
+  background:var(--bg2) !important;
+  pointer-events:none !important;
+  z-index:90 !important;
+}
+
+/* تب‌بار بالاتر از لایه‌ی پوشاننده بماند */
+.bottom-safe{
+  z-index:120 !important;
+  background:linear-gradient(
+    0deg,
+    color-mix(in srgb,var(--surface-strong) 98%, transparent),
+    color-mix(in srgb,var(--surface-soft) 88%, transparent)
+  ) !important;
+}
+
+/* هر pseudo قبلی پایین صفحه را خنثی کن */
+.bottom-safe::after,
+.bottom-safe::before,
+.app-shell::after{
+  content:none !important;
+  display:none !important;
+}
 
 
 
