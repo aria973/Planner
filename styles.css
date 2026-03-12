@@ -225,3 +225,86 @@ body::after{content:'';position:fixed;left:0;right:0;bottom:0;height:calc(env(sa
 .content-scroller{padding-bottom:calc(var(--tabbar-size) + var(--safe-bottom) + 30px);}
 .page{overflow:visible;}
 .panel,.journal-item,.reader-card,.reader-head,.hero{overflow:visible;}
+
+
+
+/* PATCH TO REMOVE BLACK BARS ON IOS DEVICES */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 100vh !important; /* Ensures proper rendering of height */
+  background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
+  color: var(--text) !important;
+  font-family: var(--body-font) !important;
+}
+
+html {
+  background: var(--bg) !important; /* Matches the starting gradient */
+}
+
+body {
+  touch-action: manipulation !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+body::after {
+  content: '' !important;
+  position: fixed !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  height: env(safe-area-inset-bottom) !important; /* Accounts for the bottom inset */
+  background: var(--bg2) !important;
+  z-index: -1 !important;
+}
+
+.app-shell {
+  position: relative !important;
+  inset: 0 !important;
+  isolation: isolate !important;
+  width: 100% !important;
+  height: calc(100% + env(safe-area-inset-top) + env(safe-area-inset-bottom)) !important; /* Adjusts for full-screen height */
+  padding-bottom: calc(var(--safe-bottom) + 14px) !important;
+  background: linear-gradient(180deg, var(--bg), var(--bg2)) !important;
+}
+
+.top-safe::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: -120px !important;
+  height: 120px !important;
+  background: linear-gradient(180deg, var(--bg), transparent) !important;
+}
+
+.bottom-safe::after {
+  content: '' !important;
+  position: absolute !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: -140px !important;
+  height: 140px !important;
+  background: linear-gradient(180deg, transparent, var(--bg2)) !important;
+}
+
+.viewport-shell {
+  background: transparent !important;
+  overflow: hidden !important;
+}
+
+.content-scroller {
+  height: calc(100% - var(--topbar-space) - env(safe-area-inset-bottom)) !important;
+  padding-bottom: calc(var(--tabbar-size) + var(--safe-bottom) + 30px) !important;
+}
+
+.page {
+  display: block !important;
+  min-height: calc(100vh - var(--tabbar-size)) !important;
+  padding-top: calc(var(--safe-top)) !important;
+  overflow: visible !important;
+}
