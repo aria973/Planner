@@ -32,7 +32,7 @@
   --blur:26px;
   --hero-font: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
   --body-font: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --app-vh: 100vh;
+  --app-vh: 100dvh;
 }
 
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
