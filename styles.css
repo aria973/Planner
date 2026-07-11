@@ -60,6 +60,7 @@ img,video{display:block;max-width:100%}
   position:relative;
   width:100%;
   height:var(--app-vh);
+  min-height: var(--app-vh);
   overflow:hidden;
   isolation:isolate;
   background:linear-gradient(180deg,var(--bg),var(--bg2));
@@ -142,7 +143,8 @@ img,video{display:block;max-width:100%}
 
 .home-page{
   min-height:calc(var(--app-vh) - var(--topbar-gap) - var(--page-bottom-gap));
-  height:calc(var(--app-vh) - var(--topbar-gap) - var(--page-bottom-gap));
+  /*height:calc(var(--app-vh) - var(--topbar-gap) - var(--page-bottom-gap));*/
+  height: auto;
   overflow:visible;
 }
 .hero{
