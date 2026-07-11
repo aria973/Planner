@@ -1125,3 +1125,23 @@ async function deleteEntry(id) { const t = tx('entries', 'readwrite'); t.objectS
 function getEntryByDate(dateKey) { const t = tx('entries'); return requestToPromise(t.objectStore('entries').index('dateKey').get(dateKey)); }
 function getAllEntries() { const t = tx('entries'); return requestToPromise(t.objectStore('entries').getAll()); }
 async function clearEntries() { const t = tx('entries', 'readwrite'); t.objectStore('entries').clear(); await transactionComplete(t); return true; }
+
+
+
+
+
+
+
+
+
+// این کد رو به انتهای فایل HTML یا تگ script اضافه کن
+function setAppHeight() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--app-vh', `${vh * 100}px`);
+}
+
+setAppHeight();
+window.addEventListener('resize', setAppHeight);
+
+
+
