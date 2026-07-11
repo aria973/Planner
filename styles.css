@@ -508,7 +508,7 @@ button:active,.upload-btn:active,a.soft-btn:active{transform:scale(.985)}
 @media (max-width:760px){
   .top-safe{top:28px}
   .content-scroller{padding-top:130px;padding-bottom:120px}
-  .home-page{height:calc(var(--app-vh) - 250px);min-height:calc(var(--app-vh) - 250px)}
+  /*.home-page{height:calc(var(--app-vh) - 250px);min-height:calc(var(--app-vh) - 250px)}*/
   .day-flip-track{min-height:clamp(250px, 40vh, 360px);height:clamp(250px, 40vh, 360px);max-height:clamp(250px, 40vh, 360px)}
 }
 
@@ -522,7 +522,7 @@ button:active,.upload-btn:active,a.soft-btn:active{transform:scale(.985)}
 @media (max-height:780px){
   .top-safe{top:24px}
   .content-scroller{padding-top:122px;padding-bottom:116px}
-  .home-page{height:calc(var(--app-vh) - 238px);min-height:calc(var(--app-vh) - 238px)}
+  /*.home-page{height:calc(var(--app-vh) - 238px);min-height:calc(var(--app-vh) - 238px)}*/
   .hero{gap:12px;padding:18px 16px 16px}
   .day-flip-track{min-height:clamp(210px, 34vh, 288px);height:clamp(210px, 34vh, 288px);max-height:clamp(210px, 34vh, 288px)}
 }
